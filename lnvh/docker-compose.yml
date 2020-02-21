@@ -1,0 +1,46 @@
+version: '3'
+
+services:
+  # v2ray
+  v2ray:
+    image: v2ray/official:latest
+    container_name: v2ray
+    restart: always
+    networks:
+      - v2ray
+    volumes:
+      - ./v2ray:/etc/v2ray
+      - ./v2ray/log:/etc/v2ray/log/v2ray
+
+  # web server
+  nginx:
+    image: nginx:latest
+    container_name: nginx
+    restart: always
+    networks:
+      - v2ray
+    ports:
+      - "80:80"
+    volumes:
+      # root
+      - ./nginx/www:/usr/share/nginx/html
+      - ./nginx/conf.d:/etc/nginx/conf.d
+      - ./nginx/log:/var/log/nginx
+
+  haproxy:
+    image: haproxy:latest
+    container_name: haproxy
+    restart: always
+    networks:
+      - v2ray
+    volumes:
+      - ./haproxy/haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg:ro
+      - ./haproxy/ca:/etc/ca
+    ports:
+      - "443:443"
+    links:
+      - v2ray
+      - nginx
+
+networks:
+  v2ray:

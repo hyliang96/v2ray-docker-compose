@@ -1,0 +1,35 @@
+version: '3'
+
+services:
+  # v2ray
+  v2ray:
+    image: v2ray/official:latest
+    container_name: v2ray
+    restart: always
+    networks:
+      - v2ray
+    volumes:
+      - ./v2ray:/etc/v2ray
+      - ./v2ray/log:/etc/v2ray/log/v2ray
+
+  # web server
+  nginx:
+    image: nginx:latest
+    container_name: nginx
+    restart: always
+    networks:
+      - v2ray
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      # root
+      - ./nginx/www:/usr/share/nginx/html
+      - ./nginx/conf.d:/etc/nginx/conf.d
+      - ./nginx/ca:/etc/nginx/ca
+      - ./nginx/log:/var/log/nginx
+    links:
+      - v2ray
+
+networks:
+  v2ray:

@@ -1,0 +1,38 @@
+{
+  "log": {
+    "loglevel": "warning",
+    "access": "/etc/v2ray/log/access.log",
+    "error": "/etc/v2ray/log/error.log"
+  },
+  "inbounds": [
+    {
+      "port": 10001,
+      "protocol": "vmess",
+      "settings": {
+        "clients": [
+          {
+            "id": "UUID1",
+            "alterId": 64
+          },
+          {
+            "id": "UUID2",
+            "alterId": 64
+          },
+          {
+            "id": "UUID3",
+            "alterId": 64
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "tcp"
+      }
+    }
+  ],
+  "outbounds": [
+    {
+      "protocol": "freedom",
+      "settings": {}
+    }
+  ]
+}
