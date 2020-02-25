@@ -11,15 +11,7 @@
       "settings": {
         "clients": [
           {
-            "id": "UUID1",
-            "alterId": 64
-          },
-          {
-            "id": "UUID2",
-            "alterId": 64
-          },
-          {
-            "id": "UUID3",
+            "id": "UUID",
             "alterId": 64
           }
         ]

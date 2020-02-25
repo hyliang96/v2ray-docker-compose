@@ -14,7 +14,7 @@ services:
 
   # web server
   nginx:
-    image: nginx:latest
+    image: nginx:alpine
     container_name: nginx
     restart: always
     networks:
@@ -26,10 +26,21 @@ services:
       # root
       - ./nginx/www:/usr/share/nginx/html
       - ./nginx/conf.d:/etc/nginx/conf.d
-      - ./nginx/ca:/etc/nginx/ca
+      - ./certbot-etc:/etc/nginx/ca
       - ./nginx/log:/var/log/nginx
     links:
       - v2ray
+    
+  # certbot
+  certbot:
+    depends_on:
+      - nginx
+    image: certbot/certbot
+    network_mode: host
+    volumes:
+      - ./certbot-etc:/etc/letsencrypt
+      - ./nginx/www:/var/www/html
+    command: certonly --webroot --webroot-path=/var/www/html --email youremail --agree-tos --no-eff-email --force-renewal -d example.com -d www.example.com
 
 networks:
   v2ray:

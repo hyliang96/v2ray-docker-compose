@@ -14,7 +14,7 @@ services:
 
   # web server
   nginx:
-    image: nginx:latest
+    image: nginx:alpine
     container_name: nginx
     restart: always
     networks:
@@ -26,6 +26,18 @@ services:
       - ./nginx/www:/usr/share/nginx/html
       - ./nginx/conf.d:/etc/nginx/conf.d
       - ./nginx/log:/var/log/nginx
+  
+  #certbot
+  certbot:
+    depends_on:
+      - nginx
+    image: certbot/certbot
+    container_name: certbot
+    network_mode: host
+    volumes:
+      - ./certbot-etc:/etc/letsencrypt
+      - ./nginx/www:/var/www/html
+    command: certonly --webroot --webroot-path=/var/www/html --email youremail --agree-tos --no-eff-email --force-renewal -d example.com -d www.example.com
 
   haproxy:
     image: haproxy:latest
@@ -35,7 +47,7 @@ services:
       - v2ray
     volumes:
       - ./haproxy/haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg:ro
-      - ./haproxy/ca:/etc/ca
+      - ./certbot-etc:/etc/ca
     ports:
       - "443:443"
     links:
