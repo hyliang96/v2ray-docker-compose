@@ -47,6 +47,7 @@ bind *:443 tfo ssl crt /etc/ca/live/example.com/example.com.pem
 将example.com替换成你自己的域名。
 
 #生成证书
+
 Letencrypt证书haproxy无法直接使用，需要将证书合并：
 ```bash
 cat certbot-etc/live/example.com/fullchain.pem > certbot-etc/live/example.com/example.com.pem
