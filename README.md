@@ -24,6 +24,7 @@ git clone https://github.com/Bond171/v2ray-docker-compose.git
 ```bash
 nano docker-compose.yml
 ```
+找到如下行：
 ```bash
 command: certonly --webroot --webroot-path=/var/www/html --email youremail --agree-tos --no-eff-email --staging -d example.com -d www.example.com
 ```
@@ -34,6 +35,7 @@ command: certonly --webroot --webroot-path=/var/www/html --email youremail --agr
 nano nginx/config.d/web.conf
 ```
 
+找到如下行：
 ```bash
 server_name www.example.com example.com;
 ```
