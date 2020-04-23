@@ -17,8 +17,11 @@
         ]
       },
       "streamSettings": {
-        "network": "tcp"
-      }
+        "network": "ds",
+        "dsSettings": {
+            "path": "/tmp1/v2ray.sock"
+        }
+      } 
     }
   ],
   "outbounds": [

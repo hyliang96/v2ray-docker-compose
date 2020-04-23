@@ -11,6 +11,7 @@ services:
     volumes:
       - ./v2ray:/etc/v2ray
       - ./v2ray/log:/etc/v2ray/log/v2ray
+      - ./tmp1:/tmp1
 
   # web server
   nginx:
@@ -48,6 +49,7 @@ services:
     volumes:
       - ./haproxy/haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg:ro
       - ./certbot-etc:/etc/ca
+      - ./tmp1:/tmp1
     ports:
       - "443:443"
     links:
