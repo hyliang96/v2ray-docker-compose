@@ -12,6 +12,7 @@ services:
       - ./v2ray:/etc/v2ray
       - ./v2ray/log:/etc/v2ray/log/v2ray
       - ./tmp1:/tmp1
+      - ./resolv.conf:/etc/resolv.conf
 
   # web server
   nginx:
