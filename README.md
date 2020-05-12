@@ -11,6 +11,7 @@
 
 [安装docker-compose](https://docs.docker.com/compose/install/)
 
+建议安装完成后切换到普通用户，将普通用户添加到docker用户组，不要用root用户使用dockers。
 
 ## 下载v2ray-docker-compose到服务器
 
@@ -43,11 +44,11 @@ server_name www.example.com example.com;
 
 ### 启动容器申请证书
 ```bash
-sudo docker-compose up
+docker-compose up
 ```
 申请完成后Ctrl+C停止容器,然后执行以下命令销毁容器。
 ```bash
-sudo docker-compose down
+docker-compose down
 ```
 
 

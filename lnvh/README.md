@@ -54,21 +54,22 @@ cat certbot-etc/live/example.com/fullchain.pem > certbot-etc/live/example.com/ex
 cat certbot-etc/live/example.com/privkey.pem >> certbot-etc/live/example.com/example.com.pem
 ```
 
+##也可以这样：
+```bash
+cd certbot-etc/live/example.com
+cat fullchain.pem privkey.pem | tee example.com.pem
+```
+
 其中example.com需要替换成你自己的域名。
 
 #启动容器
 
 ```bash
-sudo docker-compose -d
+docker-compose up
 ```
-如果没成功请执行
-```bash
-sudo docker-compose down
-```
-然后查看日志或执行：
-```bash
-sudo docker-compose up
-```
+如果没成功请Ctrl+C然后修改。
+
+如果成功了就直接关闭终端。
 
 
 #最后的说明
@@ -79,10 +80,13 @@ sudo docker-compose up
 更新证书的脚本内容可能如下：
 ```bash
 #!/bin/bash
-CERT_HOME=your_path/lnvh/certbot-etc/live/example.com
-/usr/bin/docker start certbot
-/usr/bin/docker stop haproxy
+CERT_HOME=certbot-etc/live/example.com
+cd $HOME/lnvh
+/usr/local/bin/docker-compose down
+while /usr/bin/curl example.com; sleep 1; done
+sleep 15
 cat $CERT_HOME/fullchain.pem > $CERT_HOME/example.com.pem
 cat your_$CERT_HOME/privkey.pem >> $CERT_HOME/example.com.pem
-/usr/bin/docker start haproxy
+#cat $CERT_HOME/fullchain.pem $CERT_HOME/privkey.pem | tee $CERT_HOME/example.com.pem
+/usr/local/bin/docker-compose up -d
 ```

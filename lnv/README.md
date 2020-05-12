@@ -47,16 +47,9 @@ ssl_certificate_key /etc/nginx/ca/live/example.com/privkey.pem;
 #启动容器
 
 ```bash
-sudo docker-compose -d
+docker-compose up
 ```
-如果没成功请执行
-```bash
-sudo docker-compose down
-```
-然后查看日志或执行：
-```bash
-sudo docker-compose up
-```
+如果没成功请Ctrl+C，如果运行成功直接关闭终端。
 
 
 #最后的说明
@@ -67,7 +60,9 @@ sudo docker-compose up
 更新证书的脚本内容可能如下：
 ```bash
 #!/bin/bash
-/usr/bin/docker start certbot
-/usr/bin/docker stop nginx
-/usr/bin/docker start nginx
+cd $HOME/lnvh
+/usr/local/bin/docker-compose down
+while /usr/bin/curl example.com; sleep 1; done
+sleep 15
+/usr/local/bin/docker-compose up -d
 ```
