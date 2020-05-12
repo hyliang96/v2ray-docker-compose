@@ -87,7 +87,7 @@ docker-compose up
 ```bash
 #!/bin/bash
 CERT_HOME=certbot-etc/live/example.com
-cd $HOME/lnvh
+cd /home/youruser/lnvh
 /usr/local/bin/docker-compose down
 while /usr/bin/curl example.com; do sleep 1; done
 sleep 15
