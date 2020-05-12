@@ -70,6 +70,7 @@ cat fullchain.pem privkey.pem | tee example.com.pem
 # 启动容器
 
 ```bash
+cd $HOME/lnvh
 docker-compose up
 ```
 如果没成功请Ctrl+C然后修改。
@@ -88,7 +89,7 @@ docker-compose up
 CERT_HOME=certbot-etc/live/example.com
 cd $HOME/lnvh
 /usr/local/bin/docker-compose down
-while /usr/bin/curl example.com; sleep 1; done
+while /usr/bin/curl example.com; do sleep 1; done
 sleep 15
 cat $CERT_HOME/fullchain.pem > $CERT_HOME/example.com.pem
 cat your_$CERT_HOME/privkey.pem >> $CERT_HOME/example.com.pem

@@ -65,7 +65,7 @@ docker-compose up
 #!/bin/bash
 cd $HOME/lnvh
 /usr/local/bin/docker-compose down
-while /usr/bin/curl example.com; sleep 1; done
+while /usr/bin/curl example.com; do sleep 1; done
 sleep 15
 /usr/local/bin/docker-compose up -d
 ```
