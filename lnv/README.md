@@ -63,9 +63,12 @@ docker-compose up
 
 ```bash
 #!/bin/bash
-cd /home/youruser/lnvh
-/usr/local/bin/docker-compose down
-while /usr/bin/curl example.com; do sleep 1; done
-sleep 15
-/usr/local/bin/docker-compose up -d
+cd /home/youruser/lnv
+COMPOSE="/usr/local/bin/docker-compose --no-ansi"
+DOCKER="/usr/bin/docker"
+
+$COMPOSE run certbot renew && $COMPOSE kill -s SIGHUP nginx
+$DOCKER system prune -af
+
+
 ```

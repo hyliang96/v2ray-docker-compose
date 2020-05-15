@@ -84,15 +84,23 @@ docker-compose up
 重启服务器容器会自动重启，但是证书不会更新。
 建议制定计划任务，定时执行更新证书的脚本。
 更新证书的脚本内容可能如下：
+
 ```bash
 #!/bin/bash
+cd /home/youruser/lnvh/
 CERT_HOME=certbot-etc/live/example.com
-cd /home/youruser/lnvh
-/usr/local/bin/docker-compose down
-while /usr/bin/curl example.com; do sleep 1; done
-sleep 15
+COMPOSE="/usr/local/bin/docker-compose --no-ansi"
+DOCKER="/usr/bin/docker"
+
+
+$COMPOSE run certbot renew
+
 cat $CERT_HOME/fullchain.pem > $CERT_HOME/example.com.pem
-cat your_$CERT_HOME/privkey.pem >> $CERT_HOME/example.com.pem
+cat $CERT_HOME/privkey.pem >> $CERT_HOME/example.com.pem
 #cat $CERT_HOME/fullchain.pem $CERT_HOME/privkey.pem | tee $CERT_HOME/example.com.pem
-/usr/local/bin/docker-compose up -d
+
+$COMPOSE kill -s SIGHUP haproxy
+
+$DOCKER system prune -af
+
 ```
