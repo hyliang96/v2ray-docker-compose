@@ -1,0 +1,46 @@
+version: '3'
+
+services:
+  # v2ray
+  v2ray:
+    image: v2fly/v2fly-core:latest
+    container_name: v2ray
+    restart: always
+    networks:
+      - v2ray
+    volumes:
+      - ./v2ray:/etc/v2ray
+      - ./v2ray/log:/etc/v2ray/log/v2ray
+      - ./tmp1:/tmp1
+
+  # web server
+  openresty:
+    image: openresty/openresty:buster-fat
+    container_name: openresty
+    restart: always
+    networks:
+      - v2ray
+    ports:
+      - "443:443"
+      - "8080:8080"
+    volumes:
+      # root
+      - ./nginx/www:/etc/www
+      - ./nginx/conf.d:/etc/nginx/conf.d
+      - ./nginx/nginx.conf:/usr/local/openresty/nginx/conf/nginx.conf
+      - ./nginx/log:/var/log/nginx
+      - ./certbot-etc:/etc/ssl
+
+  # tronjan-go
+  trojan:
+    image: teddysun/trojan-go
+    container_name: trojan
+    restart: always
+    networks:
+      - v2ray
+    volumes:
+      - ./trojan-go:/etc/trojan-go
+
+
+networks:
+  v2ray:

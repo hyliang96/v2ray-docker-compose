@@ -1,0 +1,27 @@
+{
+  "inbounds": [
+    {
+      "port": "10008",
+      "listen": "127.0.0.1",
+      "protocol": "vmess",
+      "settings": {
+        "clients": [
+          {
+            "id": "29a097e9-b3d8-48fc-b359-bcc40bae0795",
+            "alterId": 64
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "tcp",
+        "security": "tls"
+      }
+    }
+  ],
+  "outbounds": [
+    {
+      "protocol": "freedom",
+      "settings": {}
+    }
+  ]
+}

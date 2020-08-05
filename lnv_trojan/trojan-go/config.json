@@ -1,0 +1,14 @@
+{
+    "run_type": "server",
+    "local_addr": "127.0.0.1",
+    "local_port": 453,
+    "remote_addr": "127.0.0.1",
+    "remote_port": 8080,
+    "password": [
+        "yinzi123"
+    ],
+    "transport_plugin": {
+            "enabled": true,
+            "type": "plaintext"
+    }
+}
