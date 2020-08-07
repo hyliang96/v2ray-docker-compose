@@ -121,9 +121,8 @@ tail -n 20 v2ray-docker-compose/lnvh/v2ray/log/*.log
 `crontab -e`, 结尾输入
 
 ```bash
-0 4 5,15,25 * * bash /home/lidesheng9612/v2ray-docker-compose/lnvh/update-cert/update-cert.sh
+0 4 5,15,25 * * bash <path-to-this-repo>/lnvh/update-cert/update-cert.sh
 # 按照crontab的规则, 结尾必需空一行
 ```
 
 则每个月的5/15/25日凌晨4:00会自动尝试更新证书. 若证书即将过期, 则完成更新 而后并合并证书.
-
