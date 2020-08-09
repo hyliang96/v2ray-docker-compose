@@ -5,3 +5,4 @@
 /lnvh/update-cert/update-cert.sh
 /lnvh/v2ray/config.json
 /certbot/nginx/conf.d/web.conf
+/certbot/docker-compose.yml
