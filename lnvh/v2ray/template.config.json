@@ -1,0 +1,33 @@
+{
+  "log": {
+    "loglevel": "warning",
+    "access": "/etc/v2ray/log/access.log",
+    "error": "/etc/v2ray/log/error.log"
+  },
+  "inbounds": [
+    {
+      "port": 10001,
+      "protocol": "vmess",
+      "settings": {
+        "clients": [
+          {
+            "id": "UUID",
+            "alterId": 10
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "ds",
+        "dsSettings": {
+            "path": "/tmp1/v2ray.sock"
+        }
+      } 
+    }
+  ],
+  "outbounds": [
+    {
+      "protocol": "freedom",
+      "settings": {}
+    }
+  ]
+}

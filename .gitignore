@@ -1,0 +1,7 @@
+/lnvh/docker-compose.yml
+/lnvh/haproxy/haproxy.cfg
+/lnvh/nginx/conf.d/redirect.conf
+/lnvh/nginx/conf.d/web.conf
+/lnvh/update-cert/update-cert.sh
+/lnvh/v2ray/config.json
+/certbot/nginx/conf.d/web.conf
