@@ -1,0 +1,18 @@
+
+
+# get absoltae path to the dir this is in, work in bash, zsh
+# if you want transfer symbolic link to true path, just change `pwd` to `pwd -P`
+here=$(cd "$(dirname "${BASH_SOURCE[0]-$0}")"; pwd)
+repo_root="$here/.."
+
+scheme_root="$repo_root/$1"
+
+cd "$scheme_root"
+
+echo "docker-compose 启动"
+echo "各镜像均返回 'certbot_cerbot_1 exited with code 0' 时, 则这套v2ray配置启动成功, 关闭终端以退出, 可令docker-compose在后台继续运行 (请勿按CTRL+C)"
+echo "若有镜像返回 'certbot_cerbot_1 exited with code x' (x非0) 时, 则该镜像运行出错, 使这套v2ray配置启动失败, 请按 CTRL+C 以退出docker-compose"
+
+docker-compose up
+
+docker-compose down

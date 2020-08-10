@@ -6,3 +6,12 @@
 /lnvh/v2ray/config.json
 /certbot/nginx/conf.d/web.conf
 /certbot/docker-compose.yml
+/certbot/certbot-etc/accounts
+/certbot/certbot-etc/archive
+/certbot/certbot-etc/csr
+/certbot/certbot-etc/keys
+/certbot/certbot-etc/live
+/certbot/certbot-etc/renewal
+/lnvh/v2ray/log
+/lnvh/nginx/log
+/certbot/nginx/log
