@@ -5,7 +5,10 @@
 here=$(cd "$(dirname "${BASH_SOURCE[0]-$0}")"; pwd)
 repo_root="$here/.."
 
-scheme="$1"
+. "$here/metaconfig.sh"
+
+
+# scheme="$1"
 
 # sudo mkdir -p /usr/share/v2ray-docker-compose
 # sudo cp "$repo_root/$scheme/update-cert/update-cert.sh" /usr/share/v2ray-docker-compose/

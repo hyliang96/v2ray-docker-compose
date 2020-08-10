@@ -5,7 +5,11 @@
 here=$(cd "$(dirname "${BASH_SOURCE[0]-$0}")"; pwd)
 repo_root="$here/.."
 
-scheme_root="$repo_root/$1"
+. "$here/metaconfig.sh"
+
+
+
+scheme_root="$repo_root/$scheme"
 
 cd "$scheme_root"
 

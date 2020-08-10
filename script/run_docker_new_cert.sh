@@ -5,8 +5,18 @@
 here=$(cd "$(dirname "${BASH_SOURCE[0]-$0}")"; pwd)
 repo_root="$here/.."
 
+
+. "$here/metaconfig.sh"
+
+
+
 certbot_path="$repo_root/certbot"
-domain="$1"
+# domain="$1"
+
+if [ -f $certbot_path/certbot-etc/live/$domain/$domain.pem ]; then
+    echo "$domain 已经有证书了"
+    exit
+fi
 
 cd "$certbot_path"
 
@@ -25,4 +35,4 @@ sudo chown -R $USER:$USER $certbot_path
 cat $certbot_path/certbot-etc/live/$domain/fullchain.pem > $certbot_path/certbot-etc/live/$domain/$domain.pem
 cat $certbot_path/certbot-etc/live/$domain/privkey.pem >> $certbot_path/certbot-etc/live/$domain/$domain.pem
 
-echo $err_code
+exit $err_code
