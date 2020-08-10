@@ -54,17 +54,20 @@ while true; do
 done
 echo
 
-
+# get absoltae path to the dir this is in, work in bash, zsh
+# if you want transfer symbolic link to true path, just change `pwd` to `pwd -P`
+here=$(cd "$(dirname "${BASH_SOURCE[0]-$0}")"; pwd)
+repo_root="$here/.."
 
 templates=(
-    'certbot/template.docker-compose.yml'
-    'certbot/nginx/conf.d/template.web.conf'
-    'lnvh/template.docker-compose.yml'
-    'lnvh/v2ray/template.config.json'
-    'lnvh/nginx/conf.d/template.redirect.conf'
-    'lnvh/nginx/conf.d/template.web.conf'
-    'lnvh/haproxy/template.haproxy.cfg'
-    'lnvh/update-cert/template.update-cert.sh'
+    "${repo_root}/certbot/template.docker-compose.yml"
+    "${repo_root}/certbot/nginx/conf.d/template.web.conf"
+    "${repo_root}/lnvh/template.docker-compose.yml"
+    "${repo_root}/lnvh/v2ray/template.config.json"
+    "${repo_root}/lnvh/nginx/conf.d/template.redirect.conf"
+    "${repo_root}/lnvh/nginx/conf.d/template.web.conf"
+    "${repo_root}/lnvh/haproxy/template.haproxy.cfg"
+    "${repo_root}/lnvh/update-cert/template.update-cert.sh"
 )
 
 
