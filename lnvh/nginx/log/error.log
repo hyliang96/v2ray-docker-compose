@@ -1,1 +1,7 @@
 
+2020/08/10 13:46:35 [error] 19#19: *8 open() "/usr/share/nginx/html/favicon.ico" failed (2: No such file or directory), client: 192.168.112.4, server: gcptw3.hyliang.ml, request: "GET /favicon.ico HTTP/1.1", host: "gcptw3.hyliang.ml"
+2020/08/10 13:46:35 [error] 19#19: *8 open() "/usr/share/nginx/html/404.html" failed (2: No such file or directory), client: 192.168.112.4, server: gcptw3.hyliang.ml, request: "GET /favicon.ico HTTP/1.1", host: "gcptw3.hyliang.ml"
+2020/08/10 13:46:37 [error] 19#19: *11 open() "/usr/share/nginx/html/1" failed (2: No such file or directory), client: 192.168.112.4, server: gcptw3.hyliang.ml, request: "GET /1 HTTP/1.1", host: "gcptw3.hyliang.ml"
+2020/08/10 13:46:37 [error] 19#19: *11 open() "/usr/share/nginx/html/404.html" failed (2: No such file or directory), client: 192.168.112.4, server: gcptw3.hyliang.ml, request: "GET /1 HTTP/1.1", host: "gcptw3.hyliang.ml"
+2020/08/10 13:46:44 [error] 19#19: *13 open() "/usr/share/nginx/html/1" failed (2: No such file or directory), client: 192.168.112.4, server: gcptw3.hyliang.ml, request: "GET /1 HTTP/1.1", host: "gcptw3.hyliang.ml"
+2020/08/10 13:46:44 [error] 19#19: *13 open() "/usr/share/nginx/html/404.html" failed (2: No such file or directory), client: 192.168.112.4, server: gcptw3.hyliang.ml, request: "GET /1 HTTP/1.1", host: "gcptw3.hyliang.ml"
