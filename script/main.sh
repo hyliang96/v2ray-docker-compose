@@ -2,9 +2,11 @@ v2docker_dir=$(cd "$(dirname "${BASH_SOURCE[0]-$0}")"; pwd)
 
 
 v2docker() {
-    sudo bash "$v2docker_dir/swap/check_swap.sh"
-    sudo bash "$v2docker_dir/docker/check_docker.sh"
-    sudo bash "$v2docker_dir/status.sh"
+    sudo echo -n
+    bash "$v2docker_dir/swap/check_swap.sh"
+    bash "$v2docker_dir/docker/check_docker.sh"
+    [ "$?" != 0 ] && return
+    bash "$v2docker_dir/status.sh"
 
     if [ ! -f "$v2docker_dir/metaconfig.sh" ]; then
         bash "$v2docker_dir/config.sh"
@@ -41,5 +43,5 @@ v2docker() {
     done
     echo
 
-    sudo bash "${script_list[@]:${index}:1}"
+    bash "${script_list[@]:${index}:1}"
 }

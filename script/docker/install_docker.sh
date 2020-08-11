@@ -18,10 +18,10 @@ sudo apt-get update
 sudo apt-get install --yes --no-install-recommends docker-ce docker-ce-cli containerd.io
 ! [ $(getent group docker) ] && sudo groupadd docker
 sudo usermod --append --groups docker "$USER"
-newgrp docker
 sudo systemctl enable docker
 
 printf '\ndocker 安装成功\n\n'
 printf '等 docker服务 启动...\n\n'
 sleep 5
 
+# newgrp docker
