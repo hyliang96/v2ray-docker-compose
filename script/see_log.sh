@@ -47,7 +47,7 @@ while true; do
         docker-compose logs -t -f
     elif [[ "$index" =~ ^[0-${end_index_minux_1}]$ ]]; then
         echo "less ${log_list[$index]}"
-        less "${log_list[$index]}"
+        sudo less "${log_list[$index]}"
     elif [ "$index" = "${end_index}" ]; then
         break
     else
