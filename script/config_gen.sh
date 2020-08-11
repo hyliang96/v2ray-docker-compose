@@ -14,7 +14,7 @@ else
     v2ray_path='/'
 fi
 
-
+echo
 echo "方案:"
 echo "[0] tcp + tls (nginx, haproxy)"
 echo "[1] websocket + tls (nginx)"
@@ -32,7 +32,7 @@ for i in {0..2}; do
 done
 
 while true; do
-    new_scheme=$(bash -c "read -p '选择方案(默认当前 $scheme_index): ' c; echo \$c")
+    new_scheme=$(bash -c "read -n 1 -p '选择方案(默认当前 $scheme_index): ' c; echo \$c"); echo
     [ "$new_scheme" = '' ] && new_scheme="$scheme" && break
     if [[ "$new_scheme" =~ ^[0-2]$ ]]; then
         new_scheme="${scheme_list[$new_scheme]}"
@@ -197,17 +197,21 @@ else
     exit 1
 fi
 
+echo "参数填入配置文件:"
+
 for template in "${templates[@]}"; do
-    echo "-----------------"
     configfile="${template/.template/}"
     sed -e "s/example.com/${domain}/g" \
         -e "s/youremail/${email}/g" \
         -e "s/UUID/${UUID}/g" \
         -e "s|/your_v2ray_path|${v2ray_path}|g" \
         "$template" > "$configfile"
-    # echo "$configfile"
+
+    # echo "-----------------"
+    echo "$configfile"
     # cat $configfile
 done
+echo
 
 echo "scheme='$scheme'
 email='$email'

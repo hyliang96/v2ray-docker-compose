@@ -11,6 +11,7 @@ v2docker() {
         '启动/重启 v2docker'
         '停止 v2docker'
         '查看 log'
+        '显示客户端 v2ray 配置'
     )
 
     local script_list=(
@@ -18,6 +19,7 @@ v2docker() {
         "$v2docker_dir/start.sh"
         "$v2docker_dir/stop.sh"
         "$v2docker_dir/see_log.sh"
+        "$v2docker_dir/client_v2ray_config.sh"
     )
 
     local end_index=$(( ${#prompt_list[@]} - 1))
