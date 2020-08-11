@@ -5,7 +5,7 @@ nano docker-compose.yml
 ```
 找到以下行
 ```bash
-ommand: certonly --webroot --webroot-path=/var/www/html --email youremail --agree-tos --no-eff-email --force-renewal -d example.com -d www.example.com
+command: certonly --webroot --webroot-path=/var/www/html --email youremail --agree-tos --no-eff-email --force-renewal -d example.com -d www.example.com
 ```
 将youremail替换为你的邮箱，将example.com替换成你的域名。可使用一个或多个域名, 每个域名写一条 `-d 域名` 。
 

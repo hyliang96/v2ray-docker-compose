@@ -11,6 +11,7 @@ else
     email=someone@example.com
     domain=somesite.example.com
     UUID="$(cat /proc/sys/kernel/random/uuid)"
+    v2ray_path='/'
 fi
 
 
@@ -120,6 +121,24 @@ done
 echo
 
 
+if [ "$scheme" = 'lnv' ]; then
+    while true; do
+        new_v2ray_path=$(bash -c "read -p 'v2ray路径(需是绝对路径, 以'/'开始, 默认当前 $v2ray_path): ' c; echo \$c")
+        [ "$new_v2ray_path" = '' ] && new_v2ray_path="$v2ray_path" && break
+        if [[ "$new_v2ray_path" =~ ^/.+ ]]; then
+            # while true; do
+            #     answer=$(bash -c "read  -n 1 -p '确认域名: $new_v2ray_path ? [Y|N]' c; echo \$c"); echo
+            #     [[ "$answer" =~ ^[YyNn]$ ]] && break
+            # done
+            # [[ "$answer" =~ ^[Yy]$ ]] && break
+            break
+        else
+            echo "需是绝对路径, 以'/'开始"
+        fi
+    done
+    v2ray_path="$new_v2ray_path"
+    echo
+fi
 # while true; do
 
 
@@ -170,6 +189,7 @@ for template in "${templates[@]}"; do
     sed -e "s/example.com/${domain}/g" \
         -e "s/youremail/${email}/g" \
         -e "s/UUID/${UUID}/g" \
+        -e "s|/your_v2ray_path|${v2ray_path}|g"
         "$template" > "$configfile"
     echo "$configfile"
     cat $configfile
@@ -178,4 +198,5 @@ done
 echo "scheme='$scheme'
 email='$email'
 domain='$domain'
-UUID='$UUID'"  >  "$here/metaconfig.sh"
+UUID='$UUID'
+v2ray_path='$v2ray_path'"  >  "$here/metaconfig.sh"

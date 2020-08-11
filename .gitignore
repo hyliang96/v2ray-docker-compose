@@ -17,3 +17,7 @@
 /certbot/nginx/log/
 
 /script/metaconfig.sh
+/lnv/docker-compose.yml
+/lnv/nginx/conf.d/redirect.conf
+/lnv/nginx/conf.d/ssl.conf
+/lnv/v2ray/config.json

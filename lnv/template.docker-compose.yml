@@ -30,7 +30,7 @@ services:
       - ./nginx/log:/var/log/nginx
     links:
       - v2ray
-    
+
   # certbot
   certbot:
     depends_on:
@@ -40,7 +40,7 @@ services:
     volumes:
       - ./certbot-etc:/etc/letsencrypt
       - ./nginx/www:/var/www/html
-    command: certonly --webroot --webroot-path=/var/www/html --email youremail --agree-tos --no-eff-email --force-renewal -d example.com -d www.example.com
+    command: certonly --webroot --webroot-path=/var/www/html --email youremail --agree-tos --no-eff-email --force-renewal -d example.com
 
 networks:
   v2ray:
