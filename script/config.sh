@@ -4,7 +4,7 @@
 # if you want transfer symbolic link to true path, just change `pwd` to `pwd -P`
 here=$(cd "$(dirname "${BASH_SOURCE[0]-$0}")"; pwd)
 
-bash "$here/uninstall_update_cert.sh"
+bash "$here/stop.sh"
 
 bash "$here/config_gen.sh"
 

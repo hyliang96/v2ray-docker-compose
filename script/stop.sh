@@ -8,9 +8,9 @@ repo_root="$here/.."
 scheme_root="$repo_root/$scheme"
 cd "$scheme_root"
 
-
-docker-compose down
-docker system prune -af
-bash "$here/uninstall_update_cert.sh"
-
+if [ $(docker-compose ps | wc -l) -gt 2 ]; then
+    docker-compose down
+    docker system prune -af
+    bash "$here/uninstall_update_cert.sh"
+fi
 
