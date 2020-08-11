@@ -123,9 +123,9 @@ echo
 
 if [ "$scheme" = 'lnv' ]; then
     while true; do
-        new_v2ray_path=$(bash -c "read -p 'v2ray路径(需是绝对路径, 以'/'开始, 默认当前 $v2ray_path): ' c; echo \$c")
+        new_v2ray_path=$(bash -c "read -p 'v2ray路径(需是绝对路径, 以'/'开始, 默认当前 ${v2ray_path}): ' c; echo \$c")
         [ "$new_v2ray_path" = '' ] && new_v2ray_path="$v2ray_path" && break
-        if [[ "$new_v2ray_path" =~ ^/.+ ]]; then
+        if [[ "$new_v2ray_path" =~ ^/.* ]]; then
             # while true; do
             #     answer=$(bash -c "read  -n 1 -p '确认域名: $new_v2ray_path ? [Y|N]' c; echo \$c"); echo
             #     [[ "$answer" =~ ^[YyNn]$ ]] && break
@@ -171,28 +171,42 @@ fi
 here=$(cd "$(dirname "${BASH_SOURCE[0]-$0}")"; pwd)
 repo_root="$here/.."
 
-templates=(
-    "${repo_root}/certbot/template.docker-compose.yml"
-    "${repo_root}/certbot/nginx/conf.d/template.web.conf"
-    "${repo_root}/lnvh/template.docker-compose.yml"
-    "${repo_root}/lnvh/v2ray/template.config.json"
-    "${repo_root}/lnvh/nginx/conf.d/template.redirect.conf"
-    "${repo_root}/lnvh/nginx/conf.d/template.web.conf"
-    "${repo_root}/lnvh/haproxy/template.haproxy.cfg"
-    "${repo_root}/lnvh/update-cert/template.update-cert.sh"
-)
 
+if [ "$scheme" = 'lnvh' ]; then
+    templates=(
+        "${repo_root}/certbot/docker-compose.yml.template"
+        "${repo_root}/certbot/nginx/conf.d/web.conf.template"
+        "${repo_root}/lnvh/docker-compose.yml.template"
+        "${repo_root}/lnvh/v2ray/config.json.template"
+        "${repo_root}/lnvh/nginx/conf.d/redirect.conf.template"
+        "${repo_root}/lnvh/nginx/conf.d/web.conf.template"
+        "${repo_root}/lnvh/haproxy/haproxy.cfg.template"
+        "${repo_root}/lnvh/update-cert/update-cert.sh.template"
+    )
+elif [ "$scheme" = 'lnv' ]; then
+    templates=(
+        "${repo_root}/certbot/docker-compose.yml.template"
+        "${repo_root}/certbot/nginx/conf.d/web.conf.template"
+        "${repo_root}/lnv/docker-compose.yml.template"
+        "${repo_root}/lnv/v2ray/config.json.template"
+        "${repo_root}/lnv/nginx/conf.d/redirect.conf.template"
+        "${repo_root}/lnv/nginx/conf.d/ssl.conf.template"
+    )
+else
+    echo "不支持自动配置 $scheme 方案"
+    exit 1
+fi
 
 for template in "${templates[@]}"; do
     echo "-----------------"
-    configfile="${template/template./}"
+    configfile="${template/.template/}"
     sed -e "s/example.com/${domain}/g" \
         -e "s/youremail/${email}/g" \
         -e "s/UUID/${UUID}/g" \
-        -e "s|/your_v2ray_path|${v2ray_path}|g"
+        -e "s|/your_v2ray_path|${v2ray_path}|g" \
         "$template" > "$configfile"
-    echo "$configfile"
-    cat $configfile
+    # echo "$configfile"
+    # cat $configfile
 done
 
 echo "scheme='$scheme'

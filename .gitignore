@@ -21,3 +21,5 @@
 /lnv/nginx/conf.d/redirect.conf
 /lnv/nginx/conf.d/ssl.conf
 /lnv/v2ray/config.json
+/lnv/nginx/log
+/lnv/v2ray/log
