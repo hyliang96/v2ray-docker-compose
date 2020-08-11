@@ -20,15 +20,18 @@ fi
 
 cd "$certbot_path"
 
+echo
 echo "docker-compose 启动"
 echo "当返回 'certbot_cerbot_1 exited with code x=0,1,2...' 时, 按 CTRL+C 退出 docker-compose "
 echo "x=0, 表示证书生成成功; x≠0, 表示证书生成失败"
+echo
 
 docker-compose up --exit-code-from cerbot
 # --abort-on-container-  exit
 err_code="$?"
 
 docker-compose down
+docker system prune -af
 
 sudo chown -R $USER:$USER $certbot_path
 

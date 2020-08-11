@@ -1,0 +1,1 @@
+[ -f /etc/cron.d/update-cert-cron ] &&  sudo rm /etc/cron.d/update-cert-cron
