@@ -40,7 +40,7 @@ v2docker() {
     # if you want transfer symbolic link to true path, just change `pwd` to `pwd -P`
 
 
-    bash "${script_list[@]:${index}:1}"
+    sudo bash "${script_list[@]:${index}:1}"
 
     # release this variable in the end of file
 }

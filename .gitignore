@@ -16,3 +16,4 @@
 /lnvh/nginx/log/
 /certbot/nginx/log/
 
+/script/metaconfig.sh
