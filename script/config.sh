@@ -12,9 +12,7 @@ bash "$here/uninstall_new_cert.sh"
 bash "$here/install_new_cert.sh" "$domain"
 [ "$?" != 0 ] && exit
 
-bash "$here/install_update_cert.sh"
-bash "$here/run_docker_v2ray.sh"
-bash "$here/uninstall_update_cert.sh"
+bash "$here/start.sh"
 
 # release this variable in the end of file
 unset -v here

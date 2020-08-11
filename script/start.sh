@@ -7,11 +7,10 @@ repo_root="$here/.."
 
 . "$here/metaconfig.sh"
 
-
-
 scheme_root="$repo_root/$scheme"
-
 cd "$scheme_root"
+
+bash "$here/install_update_cert.sh"
 
 echo
 echo "docker-compose 启动"
@@ -21,5 +20,4 @@ echo
 
 docker-compose up
 
-docker-compose down
-docker system prune -af
+
