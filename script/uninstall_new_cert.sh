@@ -4,11 +4,12 @@ repo_root="$here/.."
 . "$here/metaconfig.sh"
 certbot_etc_path="$repo_root/certbot/certbot-etc"
 
-echo ${certbot_etc_path}/live/$domain/$domain.pem
 
 if [ -f ${certbot_etc_path}/live/$domain/$domain.pem ]; then
+    echo "已有证书: ${certbot_etc_path}/live/$domain/$domain.pem"
     while true; do
-        answer=$(bash -c "read -n 1 -p '删除已有证书? [Y/N] ' c; echo \$c"); echo
+        answer=$(bash -c "read -n 1 -p '删除已有证书? Y/N (默认N) ' c; echo \$c"); echo
+        [ "$answer" = '' ]  &&  answer='N'
         [[ "$answer" =~ ^[Yy]$  ]] && break
         [[ "$answer" =~ ^[Nn]$  ]] && exit
         echo "请输入Y或N"

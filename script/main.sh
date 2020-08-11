@@ -6,6 +6,11 @@ v2docker() {
     sudo bash "$v2docker_dir/docker/check_docker.sh"
     sudo bash "$v2docker_dir/status.sh"
 
+    if [ ! -f "$v2docker_dir/metaconfig.sh" ]; then
+        bash "$v2docker_dir/config.sh"
+        return
+    fi
+
     local prompt_list=(
         '配置或修改配置 v2docker 并启动'
         '启动/重启 v2docker'

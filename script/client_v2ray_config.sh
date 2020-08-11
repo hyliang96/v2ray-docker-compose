@@ -1,14 +1,18 @@
 
+
 here=$(cd "$(dirname "${BASH_SOURCE[0]-$0}")"; pwd)
 repo_root="$here/.."
 
 if [ -f "$here/metaconfig.sh" ]; then
     . "$here/metaconfig.sh"
 else
+    echo
     echo "您尚未配置 v2docker"
     exit
 fi
 
+echo
+echo "-------------------------------------------"
 echo "客户端v2ray配置参数:"
 
 if [ "${scheme}" = 'lnvh' ]; then

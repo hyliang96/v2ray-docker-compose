@@ -14,7 +14,7 @@ certbot_path="$repo_root/certbot"
 # domain="$1"
 
 if [ -f $certbot_path/certbot-etc/live/$domain/$domain.pem ]; then
-    echo "$domain 已经有证书了"
+    echo "已有证书: $certbot_path/certbot-etc/live/$domain/$domain.pem"
     exit
 fi
 

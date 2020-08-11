@@ -94,7 +94,7 @@ echo "[1] 使用自动生成的UUID"
 echo "[2] 自定义UUID"
 
 while true; do
-    UUID_scheme=$(bash -c "read -p '选择UUID类型 (默认 0): ' c; echo \$c")
+    UUID_scheme=$(bash -c "read -n 1 -p '选择UUID类型 (默认 0): ' c; echo \$c")
     [ "$UUID_scheme" = '' ] && UUID_scheme=0
     if [ "$UUID_scheme" = '0' ]; then
         break

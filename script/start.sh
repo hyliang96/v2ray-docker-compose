@@ -20,10 +20,5 @@ echo "* 若有镜像返回 'certbot_cerbot_1 exited with code x' (x非0) 时"
 echo "    则该镜像运行出错, 使这套v2ray配置启动失败, 请按 CTRL+C 以退出docker-compose"
 echo
 
-docker-compose up
-
-
-docker-compose down
-docker system prune -af
-
+docker-compose up -d
 

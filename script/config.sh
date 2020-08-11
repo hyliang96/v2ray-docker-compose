@@ -14,6 +14,8 @@ bash "$here/install_new_cert.sh" "$domain"
 
 bash "$here/start.sh"
 
+bash "$here/client_v2ray_config.sh"
+
 # release this variable in the end of file
 unset -v here
 
