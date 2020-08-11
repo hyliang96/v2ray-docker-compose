@@ -38,6 +38,8 @@ while true; do
     done
 
     index=$(bash -c "read -n 1 -p '选择log的编号? [0-${end_index}] ' c; echo \$c"); echo
+    echo
+
     if [ "${log_list[$index]}" = 'docker-compose-log' ]; then
         cd "$scheme_root"
         docker-compose logs -t -f

@@ -1,3 +1,2 @@
-* * * * * root bash UPDATE-CERT.SH
-
-
+# 每月5,15,25日 的 04:00 时更新证书
+0 4 5,15,25 * * root bash UPDATE-CERT.SH
