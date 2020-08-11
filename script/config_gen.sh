@@ -32,10 +32,10 @@ for i in {0..2}; do
 done
 
 while true; do
-    new_scheme=$(bash -c "read -n 1 -p '选择方案(默认当前 $scheme_index): ' c; echo \$c"); echo
-    [ "$new_scheme" = '' ] && new_scheme="$scheme" && break
-    if [[ "$new_scheme" =~ ^[0-2]$ ]]; then
-        new_scheme="${scheme_list[$new_scheme]}"
+    new_scheme_index=$(bash -c "read -n 1 -p '选择方案(默认当前 $scheme_index): ' c; echo \$c"); echo
+    [ "$new_scheme_index" = '' ] && new_scheme_index="$scheme_index"
+    if [[ "$new_scheme_index" =~ ^[0-2]$ ]]; then
+        new_scheme="${scheme_list[$new_scheme_index]}"
         # while true; do
         #     answer=$(bash -c "read  -n 1 -p '确认方案: $scheme ? [Y|N]' c; echo \$c"); echo
         #     [[ "$answer" =~ ^[YyNn]$ ]] && break
@@ -94,7 +94,7 @@ echo "[1] 使用自动生成的UUID"
 echo "[2] 自定义UUID"
 
 while true; do
-    UUID_scheme=$(bash -c "read -n 1 -p '选择UUID类型 (默认 0): ' c; echo \$c")
+    UUID_scheme=$(bash -c "read -n 1 -p '选择UUID类型 (默认 0): ' c; echo \$c"); echo
     [ "$UUID_scheme" = '' ] && UUID_scheme=0
     if [ "$UUID_scheme" = '0' ]; then
         break

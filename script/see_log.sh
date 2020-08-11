@@ -41,6 +41,8 @@ while true; do
     echo
 
     if [ "${log_list[$index]}" = 'docker-compose-log' ]; then
+        echo "按 CTRL+C 以退出 docker-compose log"
+        echo
         cd "$scheme_root"
         docker-compose logs -t -f
     elif [[ "$index" =~ ^[0-${end_index_minux_1}]$ ]]; then

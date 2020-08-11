@@ -10,6 +10,8 @@ repo_root="$here/.."
 scheme_root="$repo_root/$scheme"
 cd "$scheme_root"
 
+bash "$here/stop.sh"
+
 bash "$here/install_update_cert.sh"
 
 echo

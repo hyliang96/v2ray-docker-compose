@@ -8,8 +8,6 @@ repo_root="$here/.."
 
 . "$here/metaconfig.sh"
 
-
-
 certbot_path="$repo_root/certbot"
 # domain="$1"
 
@@ -19,6 +17,11 @@ if [ -f $certbot_path/certbot-etc/live/$domain/$domain.pem ]; then
 fi
 
 cd "$certbot_path"
+
+if [ $(docker-compose ps | wc -l) -gt 2 ]; then
+    docker-compose down
+    docker system prune -af
+fi
 
 echo
 echo "docker-compose 启动"
