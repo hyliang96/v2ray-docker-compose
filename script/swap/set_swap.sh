@@ -30,32 +30,44 @@ colorEcho() {
     echo -e "\033[${1}${@:2}\033[0m" 1>& 2
 }
 
+
 if [[ $(cat /proc/swaps | wc -l) -gt 1 ]]; then
     ${sudoCmd} swapoff /swapfile
 fi
-# allocate space
-# ${sudoCmd} fallocate -l 1G /swapfile
-# ${sudoCmd} dd if=/dev/zero of=/swapfile bs=1024 count=1048576
-${sudoCmd} dd if=/dev/zero of=/swapfile bs=$bs count=1M
 
-# set permission
-${sudoCmd} chmod 600 /swapfile
+if [ "$bs" = 0 ]; then
+    ${sudoCmd} rm /swapfile
 
-# make swap
-${sudoCmd} mkswap /swapfile
+    free -h
+    colorEcho ${GREEN} "关闭Swap成功"
+else
+    # allocate space
+    # ${sudoCmd} fallocate -l 1G /swapfile
+    # ${sudoCmd} dd if=/dev/zero of=/swapfile bs=1024 count=1048576
+    ${sudoCmd} dd if=/dev/zero of=/swapfile bs=$bs count=1M
 
-# enable swap
-${sudoCmd} swapon /swapfile
+    # set permission
+    ${sudoCmd} chmod 600 /swapfile
 
-# make swap permanent
-echo "/swapfile swap swap defaults 0 0" | ${sudoCmd} tee -a /etc/fstab  >/dev/null
+    # make swap
+    ${sudoCmd} mkswap /swapfile
 
-# set swap percentage
-${sudoCmd} sysctl vm.swappiness=10
-echo "vm.swappiness=10" | ${sudoCmd} tee -a /etc/sysctl.conf >/dev/null
+    # enable swap
+    ${sudoCmd} swapon /swapfile
 
-free -h
-colorEcho ${GREEN} "设置Swap成功"
+    # make swap permanent
+    if [ "$(cat /etc/fstab | grep /swapfile)" = '' ]; then
+        echo "/swapfile swap swap defaults 0 0" | ${sudoCmd} tee -a /etc/fstab  >/dev/null
+    fi
+
+    # set swap percentage
+    ${sudoCmd} sysctl vm.swappiness=10
+    echo "vm.swappiness=10" | ${sudoCmd} tee -a /etc/sysctl.conf >/dev/null
+
+    free -h
+    colorEcho ${GREEN} "设置Swap成功"
+fi
+
 # else
 #     free -h
 #     colorEcho ${BLUE} "己有Swap 无需设置"
