@@ -2,6 +2,7 @@ v2docker_dir=$(cd "$(dirname "${BASH_SOURCE[0]-$0}")"; pwd)
 
 
 v2docker() {
+    bash "$v2docker_dir/swap/check_swap.sh"
     bash "$v2docker_dir/docker/check_docker.sh"
     bash "$v2docker_dir/status.sh"
 
